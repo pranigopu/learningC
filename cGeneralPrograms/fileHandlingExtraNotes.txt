@@ -1,0 +1,12 @@
+FILE SEEK POSITION AND FUNCTION CALLS
+___
+Assuming you do not forcibly change the seek position or close the file output stream (through which you read the file), the file's seek pointer does not shift differently if you continue reading the same file using the same pointer value but in another function.
+
+For instance, say you have the file contents
+------------
+abcd efgh ijkl
+mnop qrst uvwx
+------------
+Say you read until 'e' (seek position 6). Then, you pass the file pointer as an argument to a function that continues to read the file. In that function, the file will be read from 'f' onwards.
+
+Maybe this is because "FILE" is a structure that also maintains seek position. Hence, when a variable of this structure or a pointer to this structure is passed, the corresponding seek position is accessible too.
